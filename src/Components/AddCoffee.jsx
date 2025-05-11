@@ -58,7 +58,7 @@ const AddCoffee = () => {
           ← Back to home
         </a>
         <h2 className="text-2xl font-bold text-center text-neutral mb-2">
-          Update Existing Coffee Details
+          Add Coffee Details
         </h2>
         <p className="text-center text-sm text-gray-500 mb-8 max-w-2xl mx-auto">
           It is a long established fact that a reader will be distracted by the
@@ -153,7 +153,7 @@ const AddCoffee = () => {
               type="submit"
               className="btn btn-block bg-[#D2B48C] hover:bg-[#c9a974] text-black"
             >
-              Update Coffee Details
+              Add Coffee 
             </button>
           </div>
         </form>
