@@ -1,14 +1,46 @@
 import React from "react";
 import { Eye, Edit, Trash } from "lucide-react"; // Make sure lucide-react is installed
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const CoffeeCard = ({ coffee }) => {
-  const { name, chef, supplier, taste,  photo} =
+  const { _id,name, chef, supplier, taste,  photo} =
     coffee;
 
+    const handleDelete = _id => {
+      console.log(_id);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+        
+          fetch(`http://localhost:5000/coffee/${_id}`,{
+            method : 'DELETE'
+          })
+          .then(res => res.json())
+          .then(data =>{
+            console.log(data); 
+            if(data.deletedCount > 0){
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Coffee has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+        }
+      });
+    }
   return (
     <div className="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center space-x-4 hover:shadow-md transition-shadow">
       {/* Coffee Image */}
-      <div className="w-32 h-32 flex-shrink-0">
+      <div className="w-42 h-42 flex-shrink-0">
         {name === "Cappuccino Coffee" ? (
           <div className="w-full h-full relative">
             <img
@@ -54,10 +86,15 @@ const CoffeeCard = ({ coffee }) => {
         <button className="w-8 h-8 rounded-lg bg-amber-200 flex items-center justify-center">
           <Eye size={16} className="text-gray-700" />
         </button>
-        <button className="w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center">
-          <Edit size={16} className="text-gray-700" />
-        </button>
-        <button className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center">
+        <Link to={`updateCoffee/${_id}`}>
+          <button className="w-8 h-8 rounded-lg bg-gray-200 flex items-center justify-center">
+            <Edit size={16} className="text-gray-700" />
+          </button>
+        </Link>
+        <button
+          onClick={() => handleDelete(_id)}
+          className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center"
+        >
           <Trash size={16} className="text-red-500" />
         </button>
       </div>

@@ -3,7 +3,7 @@ import "./App.css";
 import CoffeeCard from "./Components/CoffeeCard";
 
 function App() {
-  const coffees = useLoaderData(); // no destructuring here
+  const coffees = useLoaderData(); 
 
   return (
     <div>
@@ -14,7 +14,8 @@ function App() {
             Our Popular Coffees
           </h2>
           <div className="mt-4">
-            <button className="btn btn-sm bg-amber-200 hover:bg-amber-300 text-brown-900 border-amber-400 flex items-center gap-1 mx-auto">
+            <button className="btn btn-sm bg-amber-200
+             hover:bg-amber-300 text-brown-900 border-amber-400 flex items-center gap-1 mx-auto">
               Add Coffee <span className="text-lg">☕</span>
             </button>
           </div>

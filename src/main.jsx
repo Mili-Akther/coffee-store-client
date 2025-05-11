@@ -10,11 +10,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
-    loader: async () => {
-      const res = await fetch("http://localhost:5000/coffee");
-      const data = await res.json();
-      return data; // This must be an array of coffees
-    },
+    // loader: async () => {
+    //   const res = await fetch("http://localhost:5000/coffee");
+    //   const data = await res.json();
+    //   return data;
+    // },
+    loader: () => fetch("http://localhost:5000/coffee"),
   },
   {
     path: "/addCoffee",
@@ -23,6 +24,8 @@ const router = createBrowserRouter([
   {
     path: "updateCoffee",
     element: <UpdateCoffee></UpdateCoffee>,
+    loader: ({ params }) =>
+      fetch(`http://localhost:5000/coffee/${params.id}`),
   },
 ]);
 
